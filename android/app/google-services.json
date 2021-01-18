@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "690722393259",
+    "project_id": "fanua-19088",
+    "storage_bucket": "fanua-19088.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690722393259:android:fa23042eb37743b633fbee",
+        "android_client_info": {
+          "package_name": "com.kaushikindukuri.fanua"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "690722393259-lcad66lurv5cb9vtpd0jl1bh7u45ch13.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiFfIgXsroKxNjAa9QsxZJTy2PebY1170"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "690722393259-lcad66lurv5cb9vtpd0jl1bh7u45ch13.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
