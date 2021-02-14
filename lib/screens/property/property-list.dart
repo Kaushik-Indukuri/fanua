@@ -19,16 +19,20 @@ class PropertyList extends StatefulWidget {
 
 class _PropertyListState extends State<PropertyList> {
 
-  String city = "dublin";
-  String state = "ca";
+  var city = "livermore";
+  var state = "ca";
+  var propType = "single_family";
+  int propIndex = 0;
 
-  String url = "http://10.0.2.2:5000/query?city=&state=ca&proptype=single_family";
+  String url1 = "http://10.0.2.2:5000/query?city=";
+  String url2 = "&state=";
+  String url3 = "&proptype=";
   PropertySearch _propertyList;
   String address = "";
 
   Future loadData() async{
     try {
-      final response = await http.get(url);
+      final response = await http.get("$url1$city$url2$state$url3$propType");
       if (200 == response.statusCode) {
         final jsonBody = json.decode(response.body);
         PropertySearch propertySearch = new PropertySearch.fromJson(jsonBody);
@@ -39,26 +43,75 @@ class _PropertyListState extends State<PropertyList> {
     }
   }
 
-  Widget buildFilter(String filterName){
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12),
-      margin: EdgeInsets.only(right: 12),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(
-            Radius.circular(5),
-          ),
-          border: Border.all(
-            color: Colors.grey[400].withOpacity(0.3),
-            width: 1,
-          )
-      ),
-      child: Center(
-        child: Text(
-          filterName,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
+  updateList(){
+    loadData().then((propertySearch) {
+      setState(() {
+        _propertyList = propertySearch;
+      });
+    });
+  }
+
+  updatePropType(){
+    if(propIndex == 0){
+      setState(() {
+        propType = "single_family";
+      });
+    }
+    if(propIndex == 1){
+      setState(() {
+        propType = "condo";
+      });
+    }
+    if(propIndex == 2){
+      setState(() {
+        propType = "multi_family";
+      });
+    }
+    if(propIndex == 3){
+      setState(() {
+        propType = "farm";
+      });
+    }
+    if(propIndex == 4){
+      setState(() {
+        propType = "land";
+      });
+    }
+    if(propIndex == 5){
+      setState(() {
+        propType = "other";
+      });
+    }
+  }
+
+  Widget buildFilter(String filterName, int index){
+    return InkWell(
+      onTap: (){
+        setState(() {
+          propIndex = index;
+          updatePropType();
+        });
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 12),
+        decoration: BoxDecoration(
+          color: index == propIndex ? blueText : Colors.transparent,
+            borderRadius: BorderRadius.all(
+              Radius.circular(5),
+            ),
+            border: Border.all(
+              color: index == propIndex ? Colors.transparent : Colors.grey[400].withOpacity(0.3),
+              width: 1,
+            )
+        ),
+        child: Center(
+          child: Text(
+            filterName,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+            ),
           ),
         ),
       ),
@@ -71,7 +124,6 @@ class _PropertyListState extends State<PropertyList> {
     loadData().then((propertySearch) {
       setState(() {
         _propertyList = propertySearch;
-
       });
     });
   }
@@ -87,7 +139,7 @@ class _PropertyListState extends State<PropertyList> {
           children: [
             SizedBox(height: 35,),
             Padding(
-              padding: const EdgeInsets.only(left: 15),
+              padding: const EdgeInsets.only(left: 12),
               child: Text("Explore Properties", style: TextStyle(
                 fontFamily: "OpenSans",
                 fontSize: 25,
@@ -99,9 +151,15 @@ class _PropertyListState extends State<PropertyList> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                SizedBox(width: 0.5,),
                 SizedBox(
-                  width: 195,
+                  width: 210,
                   child: TextField(
+                    onSubmitted: (val){
+                      setState(() {
+                        city = val;
+                      });
+                    },
                     style: TextStyle(color: Colors.white, fontSize: 18),
                     cursorColor: Colors.white,
                     obscureText: false,
@@ -122,17 +180,17 @@ class _PropertyListState extends State<PropertyList> {
                   ),
                 ),
                 SizedBox(
-                  width: 110,
+                  width: 75,
                   child: TextField(
+                    onSubmitted: (val){
+                      setState(() {
+                        state = val;
+                      });
+                    },
                     style: TextStyle(color: Colors.white, fontSize: 18),
                     cursorColor: Colors.white,
                     obscureText: false,
                     decoration: InputDecoration(
-                      suffixIcon: IconButton(
-                        color: Colors.white,
-                        onPressed: (){},
-                        icon: Icon(Icons.search),
-                      ),
                       hintText: "State",
                       hintStyle: TextStyle(color: Colors.grey[400].withOpacity(0.3)),
                       contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
@@ -144,6 +202,20 @@ class _PropertyListState extends State<PropertyList> {
                           borderRadius: BorderRadius.circular(15),
                           borderSide: BorderSide(color: Colors.grey[400].withOpacity(0.3))
                       ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 0,),
+                SizedBox(
+                  width: 20,
+                  height: 40,
+                  child: GestureDetector(
+                    onTap: (){
+                      loadData();
+                      updateList();
+                    },
+                    child: Container(
+                      child: Icon(Icons.search, color: Colors.white,),
                     ),
                   ),
                 ),
@@ -171,14 +243,20 @@ class _PropertyListState extends State<PropertyList> {
                     scrollDirection: Axis.horizontal,
                     children: [
                       SizedBox(
-                        width: 8,
+                        width: 12,
                       ),
-                      buildFilter("Condo"),
-                      buildFilter("Single Family"),
-                      buildFilter("Multi Family"),
-                      buildFilter("Farm"),
-                      buildFilter("Land"),
-                      buildFilter("Other"),
+                      buildFilter("Single Family", 0),
+                      SizedBox(width: 12,),
+                      buildFilter("Condo", 1),
+                      SizedBox(width: 12,),
+                      buildFilter("Multi Family", 2),
+                      SizedBox(width: 12,),
+                      buildFilter("Farm", 3),
+                      SizedBox(width: 12,),
+                      buildFilter("Land", 4),
+                      SizedBox(width: 12,),
+                      buildFilter("Other", 5),
+                      SizedBox(width: 12,),
                       SizedBox(
                         width: 85,
                       ),
@@ -228,12 +306,20 @@ class _PropertyListState extends State<PropertyList> {
                   itemCount: _propertyList.properties.length,
                   itemBuilder: (context, index) {
                     return PropertyTile(
-                      _propertyList.properties[index].address.line,
-                      _propertyList.properties[index].price,
-                      _propertyList.properties[index].lotSize.size,
-                      _propertyList.properties[index].beds,
-                      _propertyList.properties[index].baths,
-                      _propertyList.properties[index].thumbnail,
+                      _propertyList.properties[index].address.line == null ? "Not Listed" : _propertyList.properties[index].address.line,
+                      _propertyList.properties[index].price == null ? null : _propertyList.properties[index].price,
+                      propIndex == 1 ? _propertyList.properties[index].buildingSize.size : _propertyList.properties[index].lotSize.size == null ? null : _propertyList.properties[index].lotSize.size,
+                      _propertyList.properties[index].beds == null ? null : _propertyList.properties[index].beds,
+                      _propertyList.properties[index].baths == null ? null : _propertyList.properties[index].baths,
+                      _propertyList.properties[index].thumbnail == null ? "https://ap.rdcpix.com/077b89d05a93b71489a176c6123f91b2l-m2250185617x.jpg" : _propertyList.properties[index].thumbnail,
+                      city[0].toUpperCase()+city.substring(1),
+                      state.toUpperCase(),
+                      _propertyList.properties[index].buildingSize.size == null ? null : _propertyList.properties[index].buildingSize.size,
+                      _propertyList.properties[index].clientDisplayFlags.hasOpenHouse == null ? false : _propertyList.properties[index].clientDisplayFlags.hasOpenHouse,
+                      _propertyList.properties[index].bathsFull == null ? null : _propertyList.properties[index].bathsFull,
+                      _propertyList.properties[index].branding.listingOffice.listItem.name == null ? "Not Listed" : _propertyList.properties[index].branding.listingOffice.listItem.name,
+                      _propertyList.properties[index].agents[0].name == null ? "Not Listed" : _propertyList.properties[index].agents[0].name,
+
                     );
                   }
               ),

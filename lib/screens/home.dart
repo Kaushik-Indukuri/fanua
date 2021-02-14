@@ -3,7 +3,7 @@ import 'package:fanua/services/constants.dart';
 import 'package:fanua/services/helperfunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'dashboard.dart';
+import 'package:fanua/screens/dashboard/dashboard.dart';
 import 'property/property-list.dart';
 import 'messaging/chatroom.dart';
 

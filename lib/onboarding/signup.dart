@@ -50,7 +50,11 @@ class _SignUpState extends State<SignUp> {
 
         databaseMethods.uploadUserInfo(userInfoMap);
         HelperFunctions.saveUserLoggedInSharedPreference(true);
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => Home()),
+              (Route<dynamic> route) => false,
+        );
       });
     }
 

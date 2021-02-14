@@ -1,4 +1,7 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fanua/constants/LoadingAnimation.dart';
+import 'package:fanua/constants/background-painter.dart';
 import 'package:fanua/constants/colors.dart';
 import 'package:fanua/onboarding/signin.dart';
 import 'package:fanua/services/auth.dart';
@@ -7,6 +10,8 @@ import 'package:fanua/services/helperfunctions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+import 'bar-chart.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -18,13 +23,46 @@ String _username = "";
 class _DashboardState extends State<Dashboard> {
 
   User user;
+  bool loading = false;
+  QuerySnapshot searchSnapshot;
   AuthMethods authMethods = new AuthMethods();
   DatabaseMethods databaseMethods = new DatabaseMethods();
   String email = "";
 
   getUserInfo() async{
     _username = await HelperFunctions.getUserNameSharedPreference();
-    setState(() {});
+    initiateSearch();
+  }
+
+  initiateSearch(){
+    databaseMethods.getInterestNotes(_username)
+        .then((val){
+      setState(() {
+        searchSnapshot = val;
+      });
+    });
+  }
+
+  Widget interestedProperty (index){
+    return Container(
+      padding: EdgeInsets.only(top: 25),
+      height: 30,
+      //color: Colors.redAccent,
+      child: Column(
+        children: [
+          Text(searchSnapshot.docs[index].data()["address"], style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),),
+          Text("Investment: " + r"$"+searchSnapshot.docs[index].data()["money"], style: TextStyle(
+            color: Colors.white,
+            fontSize: 17,
+            fontWeight: FontWeight.w500,
+          ),)
+        ],
+      ),
+    );
   }
 
   @override
@@ -37,7 +75,8 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width =  MediaQuery.of(context).size.width;
-    return Scaffold(
+
+    return searchSnapshot == null  ? Loading() : Scaffold(
       backgroundColor: background,
       appBar: AppBar(
         elevation: 0,
@@ -78,7 +117,7 @@ class _DashboardState extends State<Dashboard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Your Market Summary", style: TextStyle(
+                Text("Your Property Summary", style: TextStyle(
                   fontFamily: "OpenSans",
                     fontSize: 16,
                     color: Colors.white,
@@ -93,10 +132,10 @@ class _DashboardState extends State<Dashboard> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("January", style: TextStyle(
+                      Text("  User", style: TextStyle(
                           fontSize: 16,
                           color: Colors.white,
-                          fontWeight: FontWeight.w300
+                          fontWeight: FontWeight.w400
                       )),
                       SizedBox(width: 10,),
                       Icon(Icons.keyboard_arrow_down,
@@ -135,38 +174,38 @@ class _DashboardState extends State<Dashboard> {
                         ),
                         child: Stack(
                           children: [
-                            Positioned(
-                              top: 9,
-                              right: 0,
-                              child: RadiantGradientMask(
-                                child: Icon(MdiIcons.dotsVertical,
-                                  size: 33,
-                                  color: Colors.white,),
+                            InkWell(
+                              onTap: (){},
+                              customBorder: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(17),
                               ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    height: 50,
-                                    width: 50,
-                                    decoration: BoxDecoration(
-                                      color: thirdBackground,
-                                      borderRadius: BorderRadius.circular(30),
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(17),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 50,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                        color: thirdBackground,
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      child: RadiantGradientMask(
+                                          child: Icon(MdiIcons.currencyUsd, size: 37,
+                                          color: Colors.white,)
+                                      ),
                                     ),
-                                    child: RadiantGradientMask(
-                                        child: Icon(MdiIcons.currencyUsd, size: 37,
-                                        color: Colors.white,)
-                                    ),
-                                  ),
-                                  SizedBox(height: 10,),
-                                  Text("Cash Flow", style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500
-                                  )),
-                                ],
+                                    SizedBox(height: 10,),
+                                    Text("Cash Flow", style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500
+                                    )),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -180,15 +219,6 @@ class _DashboardState extends State<Dashboard> {
                         ),
                         child: Stack(
                           children: [
-                            Positioned(
-                              top: 9,
-                              right: 0,
-                              child: RadiantGradientMask(
-                                child: Icon(MdiIcons.dotsVertical,
-                                  size: 33,
-                                  color: Colors.white,),
-                              ),
-                            ),
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                               child: Column(
@@ -225,15 +255,6 @@ class _DashboardState extends State<Dashboard> {
                         ),
                         child: Stack(
                           children: [
-                            Positioned(
-                              top: 9,
-                              right: 0,
-                              child: RadiantGradientMask(
-                                child: Icon(MdiIcons.dotsVertical,
-                                size: 33,
-                                color: Colors.white,),
-                              ),
-                            ),
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                               child: Column(
@@ -264,6 +285,117 @@ class _DashboardState extends State<Dashboard> {
                       ),
                     ],
                   ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 11, top: 10, bottom: 5),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text("Your Interested Properties", style: TextStyle(
+                        fontFamily: "OpenSans",
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w300,
+                      ),),
+                    ),
+                  ),
+                  Card(
+                    margin: EdgeInsets.symmetric(horizontal: 8),
+                    color: secondaryBackground,
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(17)
+                    ),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: secondaryBackground,
+                        borderRadius: BorderRadius.circular(17),
+                      ),
+                      height: 125,
+                      child: Stack(
+                        overflow: Overflow.clip,
+                        children: [
+                          Positioned(
+                            top: 12,
+                            left: 12,
+                            child: RadiantGradientMask(
+                              child: Icon(MdiIcons.chevronUp,
+                                size: 28,
+                                color: Colors.white,),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 12,
+                            left: 12,
+                            child: RadiantGradientMask(
+                              child: Icon(MdiIcons.chevronDown,
+                                size: 28,
+                                color: Colors.white,),
+                            ),
+                          ),
+                          Positioned(
+                            top: 12,
+                            right: 9,
+                            child: RadiantGradientMask(
+                              child: Icon(MdiIcons.dotsVertical,
+                                size: 33,
+                                color: Colors.white,),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: searchSnapshot.docs.length != 0 ? ListWheelScrollView(
+                              itemExtent: 100,
+                              diameterRatio: 1.75,
+                              children: List.generate(searchSnapshot.docs.length, (index) =>
+                                  interestedProperty(index),
+                              ),
+                            ) :
+                                Text("Currently No Interested Properties", style: TextStyle(
+                                  color: secondaryText,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                ),)
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 11, top: 20, bottom: 5),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Avg Monthly House Price"+"  (In "+r"$"+"100,000)", style: TextStyle(
+                            fontFamily: "OpenSans",
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w300,
+                          ),),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Card(
+                    margin: EdgeInsets.symmetric(horizontal: 8),
+                    color: secondaryBackground,
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(17)
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: secondaryBackground,
+                        borderRadius: BorderRadius.circular(17),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
+                        child: BarChartSample3(),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 75,),
                 ],
               ),
             ),

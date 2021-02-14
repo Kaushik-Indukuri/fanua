@@ -127,8 +127,8 @@ class _FilterState extends State<Filter> {
             children: [
 
               buildOption("Any", false),
-              buildOption("1", false),
-              buildOption("2", true),
+              buildOption("1+", false),
+              buildOption("2+", true),
               buildOption("3+", false),
 
             ],
@@ -155,8 +155,8 @@ class _FilterState extends State<Filter> {
             children: [
 
               buildOption("Any", true),
-              buildOption("1", false),
-              buildOption("2", false),
+              buildOption("1+", false),
+              buildOption("2+", false),
               buildOption("3+", false),
 
             ],

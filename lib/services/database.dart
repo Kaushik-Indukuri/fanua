@@ -51,4 +51,16 @@ class DatabaseMethods {
         .snapshots();
   }
 
+  getNotes(String addressCode) async{
+    return await FirebaseFirestore.instance.collection("notes")
+        .where("address", isEqualTo: addressCode)
+        .get();
+  }
+
+  getInterestNotes(String name) async{
+    return await FirebaseFirestore.instance.collection("notes")
+        .where("name", isEqualTo: name)
+        .get();
+  }
+
 }

@@ -56,7 +56,11 @@ class _SignInState extends State<SignIn> {
           loading = false;
         });
       } else {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home(),));
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => Home()),
+              (Route<dynamic> route) => false,
+        );
         print('signed in');
       }
     }

@@ -8,6 +8,9 @@ Color secondaryText = Color(0xFF7d7a8b);
 Color blueText = Color(0xFF51abd4);
 Color darkBlue = Color(0xFF2986a4);
 Color gradientGreen = Color(0xFF34ae97);
+Color paletteBlue = Color(0xFF50a7b4);
+Color paletteGreen = Color(0xFF0d3333);
+Color grey = Colors.blueGrey;
 
 Gradient blueGradient = LinearGradient(
     begin: Alignment.topRight,

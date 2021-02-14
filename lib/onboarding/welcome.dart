@@ -29,7 +29,7 @@ class Welcome extends StatelessWidget {
                       fontSize: 34
                   ),)),
                   SizedBox(height: 20,),
-                  FadeAnimation(1.2, Text("Fanua, a free application to track and invest in real estate ",
+                  FadeAnimation(1.2, Text("Fafoo Investments, a free application to track and invest in real estate ",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: secondaryText,
