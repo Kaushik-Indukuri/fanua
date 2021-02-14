@@ -1,6 +1,9 @@
-# fanua
+# fafoo investment
 
-real estate app
+real estate and investment app
+github repo to view the code: https://github.com/Kaushik-Indukuri/Fafoo-Investments/
+
+:):)
 
 ## Getting Started
 
