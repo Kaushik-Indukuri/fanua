@@ -24,6 +24,8 @@ class Detail extends StatefulWidget {
   final int bathsFull;
   final String officeName;
   final String agentName;
+  final double lat;
+  final double lon;
   Detail(
       this.image,
       this.address,
@@ -36,7 +38,9 @@ class Detail extends StatefulWidget {
       this.openHouse,
       this.bathsFull,
       this.officeName,
-      this.agentName);
+      this.agentName,
+      this.lat,
+      this.lon);
 
   @override
   _DetailState createState() => _DetailState();
@@ -537,7 +541,7 @@ class _DetailState extends State<Detail> {
                 child: Icon(MdiIcons.plusBoxMultipleOutline, color: secondaryBackground, size: 32),
                 backgroundColor: Colors.transparent,
                 onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => UserInterest(addressCode)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => UserInterest(addressCode, widget.lat, widget.lon)));
                 }
             ),
           ),

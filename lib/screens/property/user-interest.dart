@@ -10,7 +10,9 @@ String _username = '';
 
 class UserInterest extends StatefulWidget {
   final String addressCode;
-  UserInterest(this.addressCode);
+  final double lat;
+  final double lon;
+  UserInterest(this.addressCode, this.lat, this.lon);
 
   @override
   _UserInterestState createState() => _UserInterestState();
@@ -89,6 +91,8 @@ class _UserInterestState extends State<UserInterest> {
                                 'experience': experience.text,
                                 'contact': contact.text,
                                 'address': widget.addressCode,
+                                'lat' : widget.lat,
+                                'lon' : widget.lon,
                               }).whenComplete(() => Navigator.pop(context));
                               setState(() {});
                             },

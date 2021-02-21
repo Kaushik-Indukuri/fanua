@@ -19,7 +19,7 @@ class PropertyList extends StatefulWidget {
 
 class _PropertyListState extends State<PropertyList> {
 
-  var city = "livermore";
+  var city = "dublin";
   var state = "ca";
   var propType = "single_family";
   int propIndex = 0;
@@ -89,7 +89,6 @@ class _PropertyListState extends State<PropertyList> {
       onTap: (){
         setState(() {
           propIndex = index;
-          updatePropType();
         });
       },
       child: Container(
@@ -211,6 +210,7 @@ class _PropertyListState extends State<PropertyList> {
                   height: 40,
                   child: GestureDetector(
                     onTap: (){
+                      updatePropType();
                       loadData();
                       updateList();
                     },
@@ -308,7 +308,7 @@ class _PropertyListState extends State<PropertyList> {
                     return PropertyTile(
                       _propertyList.properties[index].address.line == null ? "Not Listed" : _propertyList.properties[index].address.line,
                       _propertyList.properties[index].price == null ? null : _propertyList.properties[index].price,
-                      propIndex == 1 ? _propertyList.properties[index].buildingSize.size : _propertyList.properties[index].lotSize.size == null ? null : _propertyList.properties[index].lotSize.size,
+                      _propertyList.properties[index].buildingSize.size == null ? null : _propertyList.properties[index].buildingSize.size,
                       _propertyList.properties[index].beds == null ? null : _propertyList.properties[index].beds,
                       _propertyList.properties[index].baths == null ? null : _propertyList.properties[index].baths,
                       _propertyList.properties[index].thumbnail == null ? "https://ap.rdcpix.com/077b89d05a93b71489a176c6123f91b2l-m2250185617x.jpg" : _propertyList.properties[index].thumbnail,
@@ -319,6 +319,8 @@ class _PropertyListState extends State<PropertyList> {
                       _propertyList.properties[index].bathsFull == null ? null : _propertyList.properties[index].bathsFull,
                       _propertyList.properties[index].branding.listingOffice.listItem.name == null ? "Not Listed" : _propertyList.properties[index].branding.listingOffice.listItem.name,
                       _propertyList.properties[index].agents[0].name == null ? "Not Listed" : _propertyList.properties[index].agents[0].name,
+                      _propertyList.properties[index].address.lat,
+                      _propertyList.properties[index].address.lon,
 
                     );
                   }

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-Color background = Color(0xFF211e2f);
-Color darkBackground = Color(0xFF191524);
-Color secondaryBackground = Color(0xFF272335);
-Color thirdBackground = Color(0xFF322f42);
-Color secondaryText = Color(0xFF7d7a8b);
-Color blueText = Color(0xFF51abd4);
-Color darkBlue = Color(0xFF2986a4);
-Color gradientGreen = Color(0xFF34ae97);
-Color paletteBlue = Color(0xFF50a7b4);
-Color paletteGreen = Color(0xFF0d3333);
-Color grey = Colors.blueGrey;
+const Color background = Color(0xFF211e2f);
+const Color darkBackground = Color(0xFF191524);
+const Color secondaryBackground = Color(0xFF272335);
+const Color thirdBackground = Color(0xFF322f42);
+const Color secondaryText = Color(0xFF7d7a8b);
+const Color blueText = Color(0xFF51abd4);
+const Color darkBlue = Color(0xFF2986a4);
+const Color gradientGreen = Color(0xFF34ae97);
+const Color paletteBlue = Color(0xFF50a7b4);
+const Color paletteGreen = Color(0xFF0d3333);
+const Color grey = Colors.blueGrey;
 
 Gradient blueGradient = LinearGradient(
     begin: Alignment.topRight,

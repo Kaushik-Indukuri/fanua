@@ -4,6 +4,7 @@ import 'package:fanua/constants/LoadingAnimation.dart';
 import 'package:fanua/constants/background-painter.dart';
 import 'package:fanua/constants/colors.dart';
 import 'package:fanua/onboarding/signin.dart';
+import 'package:fanua/screens/dashboard/similar-users.dart';
 import 'package:fanua/services/auth.dart';
 import 'package:fanua/services/database.dart';
 import 'package:fanua/services/helperfunctions.dart';
@@ -11,7 +12,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import 'bar-chart.dart';
+import 'line-chart.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -128,11 +129,13 @@ class _DashboardState extends State<Dashboard> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)
                   ),
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SimilarUsers()));
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("  User", style: TextStyle(
+                      Text("Network", style: TextStyle(
                           fontSize: 16,
                           color: Colors.white,
                           fontWeight: FontWeight.w400
@@ -304,59 +307,62 @@ class _DashboardState extends State<Dashboard> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(17)
                     ),
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: secondaryBackground,
-                        borderRadius: BorderRadius.circular(17),
-                      ),
-                      height: 125,
-                      child: Stack(
-                        overflow: Overflow.clip,
-                        children: [
-                          Positioned(
-                            top: 12,
-                            left: 12,
-                            child: RadiantGradientMask(
-                              child: Icon(MdiIcons.chevronUp,
-                                size: 28,
-                                color: Colors.white,),
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 12,
-                            left: 12,
-                            child: RadiantGradientMask(
-                              child: Icon(MdiIcons.chevronDown,
-                                size: 28,
-                                color: Colors.white,),
-                            ),
-                          ),
-                          Positioned(
-                            top: 12,
-                            right: 9,
-                            child: RadiantGradientMask(
-                              child: Icon(MdiIcons.dotsVertical,
-                                size: 33,
-                                color: Colors.white,),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: searchSnapshot.docs.length != 0 ? ListWheelScrollView(
-                              itemExtent: 100,
-                              diameterRatio: 1.75,
-                              children: List.generate(searchSnapshot.docs.length, (index) =>
-                                  interestedProperty(index),
+                    child: GestureDetector(
+                      onTap: (){},
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: secondaryBackground,
+                          borderRadius: BorderRadius.circular(17),
+                        ),
+                        height: 125,
+                        child: Stack(
+                          overflow: Overflow.clip,
+                          children: [
+                            Positioned(
+                              top: 12,
+                              left: 12,
+                              child: RadiantGradientMask(
+                                child: Icon(MdiIcons.chevronUp,
+                                  size: 28,
+                                  color: Colors.white,),
                               ),
-                            ) :
-                                Text("Currently No Interested Properties", style: TextStyle(
-                                  color: secondaryText,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                ),)
-                          ),
-                        ],
+                            ),
+                            Positioned(
+                              bottom: 12,
+                              left: 12,
+                              child: RadiantGradientMask(
+                                child: Icon(MdiIcons.chevronDown,
+                                  size: 28,
+                                  color: Colors.white,),
+                              ),
+                            ),
+                            Positioned(
+                              top: 12,
+                              right: 9,
+                              child: RadiantGradientMask(
+                                child: Icon(MdiIcons.dotsVertical,
+                                  size: 33,
+                                  color: Colors.white,),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: searchSnapshot.docs.length != 0 ? ListWheelScrollView(
+                                itemExtent: 100,
+                                diameterRatio: 1.75,
+                                children: List.generate(searchSnapshot.docs.length, (index) =>
+                                    interestedProperty(index),
+                                ),
+                              ) :
+                                  Text("Currently No Interested Properties", style: TextStyle(
+                                    color: secondaryText,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                  ),)
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -367,7 +373,7 @@ class _DashboardState extends State<Dashboard> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Avg Monthly House Price"+"  (In "+r"$"+"100,000)", style: TextStyle(
+                          Text("Nearby Housing Trends", style: TextStyle(
                             fontFamily: "OpenSans",
                             color: Colors.white,
                             fontSize: 16,
@@ -390,8 +396,8 @@ class _DashboardState extends State<Dashboard> {
                         borderRadius: BorderRadius.circular(17),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
-                        child: BarChartSample3(),
+                        padding: const EdgeInsets.only(left: 3.0, right: 3.0, top: 8.0),
+                        child: LineChartSample2(),
                       ),
                     ),
                   ),

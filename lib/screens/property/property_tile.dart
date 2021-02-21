@@ -17,6 +17,8 @@ class PropertyTile extends StatelessWidget {
   final int bathsFull;
   final String officeName;
   final String agentName;
+  final double lat;
+  final double lon;
   PropertyTile(
       this.address,
       this.price,
@@ -30,7 +32,9 @@ class PropertyTile extends StatelessWidget {
       this.openHouse,
       this.bathsFull,
       this.officeName,
-      this.agentName);
+      this.agentName,
+      this.lat,
+      this.lon);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,7 @@ class PropertyTile extends StatelessWidget {
         child: GestureDetector(
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => Detail(
-                image, address, beds, baths, lotSize, city, state, buildingSize, openHouse, bathsFull, officeName, agentName)
+                image, address, beds, baths, lotSize, city, state, buildingSize, openHouse, bathsFull, officeName, agentName, lat, lon)
             ));
           },
           child: Container(
