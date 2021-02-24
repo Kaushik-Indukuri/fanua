@@ -5,7 +5,7 @@ class BackgroundPainter extends CustomPainter{
 
   BackgroundPainter() :
         bluePaint = Paint()..color = paletteBlue..style = PaintingStyle.fill,
-        greyPaint = Paint()..color = background..style = PaintingStyle.fill,
+        greyPaint = Paint()..color = lightbackground..style = PaintingStyle.fill,
         greenPaint = Paint()..color = darkBlue..style = PaintingStyle.fill;
 
   final bluePaint;

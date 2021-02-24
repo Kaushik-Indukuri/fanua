@@ -6,7 +6,7 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: background,
+      color: Colors.grey[300],
       child: Center(
         child: CircularProgressIndicator(
           valueColor: new AlwaysStoppedAnimation<Color>(blueText),

@@ -9,29 +9,32 @@ class SimilarUsers extends StatefulWidget {
 class _SimilarUsersState extends State<SimilarUsers> {
   @override
   Widget build(BuildContext context) {
-
     final height = MediaQuery.of(context).size.height;
-    final width =  MediaQuery.of(context).size.width;
+    final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
         title: Align(
-          alignment: Alignment.topLeft,
+          alignment: Alignment.topCenter,
           child: Container(
-              margin: const EdgeInsets.only(left: 85),
-              child: Text('Network', style: TextStyle(
-                  fontFamily: "OpenSans",
-                  fontSize: 26,
-                  fontWeight: FontWeight.w400
-              ),)),
+              margin: const EdgeInsets.only(right: 50),
+              child: Text(
+                'Network',
+                style: TextStyle(
+                    fontFamily: "OpenSans",
+                    fontSize: 26,
+                    fontWeight: FontWeight.w400),
+              )),
         ),
         elevation: 0,
         brightness: Brightness.light,
         backgroundColor: secondaryBackground,
-        toolbarHeight: height/10.5,
+        toolbarHeight: height / 10.5,
+      ),
+      body: SingleChildScrollView(
+        child: Container(),
       ),
     );
   }
 }
-

@@ -19,6 +19,8 @@ class PropertyTile extends StatelessWidget {
   final String agentName;
   final double lat;
   final double lon;
+  final int index;
+
   PropertyTile(
       this.address,
       this.price,
@@ -34,17 +36,34 @@ class PropertyTile extends StatelessWidget {
       this.officeName,
       this.agentName,
       this.lat,
-      this.lon);
+      this.lon,
+      this.index);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
         child: GestureDetector(
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Detail(
-                image, address, beds, baths, lotSize, city, state, buildingSize, openHouse, bathsFull, officeName, agentName, lat, lon)
-            ));
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Detail(
+                        image,
+                        address,
+                        beds,
+                        baths,
+                        lotSize,
+                        city,
+                        state,
+                        buildingSize,
+                        openHouse,
+                        bathsFull,
+                        officeName,
+                        agentName,
+                        lat,
+                        lon,
+                        index)));
           },
           child: Container(
             margin: EdgeInsets.only(left: 20, right: 20, bottom: 25),
@@ -52,6 +71,18 @@ class PropertyTile extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey[500],
+                    offset: Offset(4.0, 4.0),
+                    blurRadius: 15.0,
+                    spreadRadius: 1.0),
+                BoxShadow(
+                    color: Colors.white,
+                    offset: Offset(-4.0, -4.0),
+                    blurRadius: 15.0,
+                    spreadRadius: 1.0),
+              ],
             ),
             child: Stack(
               children: [
@@ -65,7 +96,8 @@ class PropertyTile extends StatelessWidget {
                     tag: image,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
-                      child: Image.network(image,
+                      child: Image.network(
+                        image,
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -75,16 +107,16 @@ class PropertyTile extends StatelessWidget {
                   top: 15,
                   left: 15,
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical:5),
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                     decoration: BoxDecoration(
-                      color: thirdBackground,
+                      color: background.withOpacity(0.75),
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: Text("FOR SALE", style: TextStyle(
-                        fontSize: 16,
-                        color: blueText,
-                        fontWeight: FontWeight.w500
-                    )),
+                    child: Text("FOR SALE",
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: blueText,
+                            fontWeight: FontWeight.bold)),
                   ),
                 ),
                 Column(
@@ -97,47 +129,70 @@ class PropertyTile extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              Icon(MdiIcons.mapMarkerOutline, color: blueText, size: 25,),
+                              Icon(
+                                MdiIcons.mapMarkerOutline,
+                                color: blueText,
+                                size: 25,
+                              ),
                               SizedBox(
                                 width: 200,
-                                child: Text(address, style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),),
+                                child: Text(
+                                  address,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
                             ],
                           ),
-                          Text(r"$"+ "$price", style: TextStyle(
-                            fontFamily: "OpenSans",
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),)
+                          Text(
+                            r"$" + "$price",
+                            style: TextStyle(
+                              fontFamily: "OpenSans",
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
                         ],
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 12, right: 12, bottom: 13),
+                      padding: const EdgeInsets.only(
+                          left: 12, right: 12, bottom: 13),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(" $beds Beds | $baths Baths", style: TextStyle(
-                            fontFamily: "OpenSans",
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),),
+                          Text(
+                            " $beds Beds | $baths Baths",
+                            style: TextStyle(
+                              fontFamily: "OpenSans",
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                           Row(
                             children: [
-                              Icon(MdiIcons.arrowExpandAll, color: Colors.white, size: 17,),
-                              SizedBox(width: 3,),
-                              Text("$lotSize sqft", style: TextStyle(
-                                fontFamily: "OpenSans",
+                              Icon(
+                                MdiIcons.arrowExpandAll,
                                 color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),),
+                                size: 17,
+                              ),
+                              SizedBox(
+                                width: 3,
+                              ),
+                              Text(
+                                "$lotSize sqft",
+                                style: TextStyle(
+                                  fontFamily: "OpenSans",
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                             ],
                           )
                         ],

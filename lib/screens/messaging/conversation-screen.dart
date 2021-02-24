@@ -63,7 +63,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
     final width =  MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: background,
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,12 +77,12 @@ class _ConversationScreenState extends State<ConversationScreen> {
                       fontWeight: FontWeight.w400
                   ),)),
             ),
-            Icon(MdiIcons.accountCircleOutline, size: 32, color: Colors.white,)
+            Icon(MdiIcons.messageReplyText, size: 35, color: blueText)
           ],
         ),
         elevation: 0,
         brightness: Brightness.light,
-        backgroundColor: Colors.blueGrey.withOpacity(0.2),
+        backgroundColor: Colors.grey[600],
         toolbarHeight: height/12,
       ),
       body: Container(
@@ -94,7 +94,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
               width: MediaQuery.of(context).size.width,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-                color: Colors.grey[600],
+                color: thirdBackground,
                 child: Row(
                   children: [
                     Expanded(
@@ -165,7 +165,7 @@ class MessageTile extends StatelessWidget {
           gradient: isSendByMe ? blueMessage : greyMessage,
         ),
         child: Text(message, style: TextStyle(
-          color: Colors.white,
+          color: isSendByMe? Colors.white : Colors.black,
           fontSize: 18,
         ),),
       ),

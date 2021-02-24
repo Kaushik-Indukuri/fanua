@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const Color background = Color(0xFF211e2f);
+const Color lightbackground = Color(0xffE0E0E0);
 const Color darkBackground = Color(0xFF191524);
 const Color secondaryBackground = Color(0xFF272335);
 const Color thirdBackground = Color(0xFF322f42);
@@ -72,8 +73,8 @@ Gradient greyGradient = LinearGradient(
 
 Gradient greyMessage = LinearGradient(
     colors: [
-      const Color(0x1AFFFFFF),
-      const Color(0x1AFFFFFF)
+      const Color(0xFFc7c7c7),
+      const Color(0xFFc7c7c7)
     ],
 );
 

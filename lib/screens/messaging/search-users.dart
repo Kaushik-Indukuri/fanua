@@ -74,11 +74,13 @@ class _SearchUsersState extends State<SearchUsers> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(userName, style: TextStyle(
-                    color: Colors.white,
+                    color: secondaryText,
+                    fontWeight: FontWeight.w500,
                     fontSize: 16,
                   )),
                   Text(userEmail, style: TextStyle(
-                    color: Colors.white,
+                    color: secondaryText,
+                    fontWeight: FontWeight.w500,
                     fontSize: 16,
                   )),
                 ],
@@ -110,7 +112,7 @@ class _SearchUsersState extends State<SearchUsers> {
           SizedBox(height: 10,),
           Container(
             height: 1,
-            color: secondaryText,
+            color: secondaryText.withOpacity(0.6),
           )
         ],
       ),
@@ -134,7 +136,7 @@ class _SearchUsersState extends State<SearchUsers> {
     final width =  MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: background,
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -149,16 +151,12 @@ class _SearchUsersState extends State<SearchUsers> {
                       fontWeight: FontWeight.w400
                   ),)),
             ),
-            Image.asset(
-              'assets/fanua-logo.png',
-              fit: BoxFit.contain,
-              height: 35,
-            ),
+            Icon(MdiIcons.accountCircleOutline, size: 37, color: blueText,),
           ],
         ),
         elevation: 0,
         brightness: Brightness.light,
-        backgroundColor: secondaryBackground,
+        backgroundColor: Colors.grey[600],
         toolbarHeight: height/10.5,
       ),
       body: Container(
@@ -166,7 +164,7 @@ class _SearchUsersState extends State<SearchUsers> {
           children: [
             Container(
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-              color: Colors.grey[600],
+              color: thirdBackground,
               child: Row(
                 children: [
                   Expanded(

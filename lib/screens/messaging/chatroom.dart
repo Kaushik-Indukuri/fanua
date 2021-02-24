@@ -5,6 +5,7 @@ import 'package:fanua/services/constants.dart';
 import 'package:fanua/services/database.dart';
 import 'package:fanua/services/helperfunctions.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../home.dart';
 import 'conversation-screen.dart';
 
@@ -58,7 +59,7 @@ class _ChatroomState extends State<Chatroom> {
     final width =  MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: background,
+      backgroundColor: lightbackground,
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -73,16 +74,12 @@ class _ChatroomState extends State<Chatroom> {
                       fontWeight: FontWeight.w400
                   ),)),
             ),
-            Image.asset(
-              'assets/fanua-logo.png',
-              fit: BoxFit.contain,
-              height: 35,
-            ),
+            Icon(MdiIcons.accountCircleOutline, size: 37, color: blueText,),
           ],
         ),
         elevation: 0,
         brightness: Brightness.light,
-        backgroundColor: secondaryBackground,
+        backgroundColor: Colors.grey[600],
         toolbarHeight: height/10.5,
       ),
 
@@ -92,16 +89,24 @@ class _ChatroomState extends State<Chatroom> {
           height: MediaQuery.of(context).size.width/6.3,
           width: MediaQuery.of(context).size.width/6.3,
           decoration: BoxDecoration(
-              boxShadow: [BoxShadow(
-                blurRadius: 3,
-                offset: Offset(0,1),
-              )],
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey[500],
+                    offset: Offset(4.0, 4.0),
+                    blurRadius: 15.0,
+                    spreadRadius: 1.0),
+                BoxShadow(
+                    color: Colors.white,
+                    offset: Offset(-4.0, -4.0),
+                    blurRadius: 15.0,
+                    spreadRadius: 1.0),
+              ],
               gradient: buttonGradient,
               borderRadius: BorderRadius.circular(50)
           ),
           child: FloatingActionButton(
               elevation: 0.0,
-              child: Icon(Icons.search, color: secondaryBackground, size: 32),
+              child: Icon(Icons.search, color: Colors.grey[300], size: 32),
               backgroundColor: Colors.transparent,
               onPressed: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => SearchUsers()));
@@ -134,7 +139,7 @@ class ChatRoomTile extends StatelessWidget {
                   width: 40,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: gradientGreen,
+                    color: blueText,
                     borderRadius: BorderRadius.circular(40),
                   ),
                   child: Text("${userName.substring(0,1).toUpperCase()}", style:
@@ -146,7 +151,8 @@ class ChatRoomTile extends StatelessWidget {
                 ),
                 SizedBox(width: 15,),
                 Text(userName, style: TextStyle(
-                  color: Colors.white,
+                  color: secondaryText,
+                  fontWeight: FontWeight.w500,
                   fontSize: 18,
                 ),),
               ],
@@ -154,7 +160,7 @@ class ChatRoomTile extends StatelessWidget {
             SizedBox(height: 22,),
             Container(
               height: 1,
-              color: secondaryText,
+              color: secondaryText.withOpacity(0.6),
             )
           ],
         ),

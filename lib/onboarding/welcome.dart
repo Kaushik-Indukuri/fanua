@@ -4,14 +4,11 @@ import 'package:fanua/onboarding/signin.dart';
 import 'package:fanua/onboarding/signup.dart';
 import 'package:flutter/material.dart';
 
-
-
 class Welcome extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: background,
+      backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Container(
           width: double.infinity,
@@ -23,72 +20,93 @@ class Welcome extends StatelessWidget {
             children: <Widget>[
               Column(
                 children: <Widget>[
-                  FadeAnimation(1, Text("Welcome", style: TextStyle(
-                    color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 34
-                  ),)),
-                  SizedBox(height: 20,),
-                  FadeAnimation(1.2, Text("Fafoo Investments, a free application to track and invest in real estate ",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: secondaryText,
-                        fontSize: 18
-                    ),)),
+                  FadeAnimation(
+                      1,
+                      Text(
+                        "Welcome",
+                        style: TextStyle(
+                            color: blueText,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 34),
+                      )),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  FadeAnimation(
+                      1.2,
+                      Text(
+                        "Propfolio, a free application to track and invest in real estate ",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: secondaryText, fontSize: 18),
+                      )),
                 ],
               ),
-              FadeAnimation(1.4, Container(
-                height: MediaQuery.of(context).size.height / 3,
-                decoration: BoxDecoration(
-                  //color: Colors.red,
-                    image: DecorationImage(
-                        image: AssetImage('assets/welcome-home.png')
-                    )
-                ),
-              )),
+              FadeAnimation(
+                  1.4,
+                  Container(
+                    height: MediaQuery.of(context).size.height / 3,
+                    decoration: BoxDecoration(
+                        //color: Colors.red,
+                        image: DecorationImage(
+                            image: AssetImage('assets/welcome-home.png'))),
+                  )),
               Column(
                 children: <Widget>[
-                  FadeAnimation(1.5, MaterialButton(
-                    minWidth: double.infinity,
-                    height: 60,
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn()));
-                    },
-                    shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                            color: blueText,
+                  FadeAnimation(
+                      1.5,
+                      MaterialButton(
+                        minWidth: double.infinity,
+                        height: 60,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignIn()));
+                        },
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              width: 2,
+                              color: blueText,
+                            ),
+                            borderRadius: BorderRadius.circular(50)),
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
+                              color: blueText,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
                         ),
-                        borderRadius: BorderRadius.circular(50)
-                    ),
-                    child: Text("Login", style: TextStyle(
-                        color: blueText,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18
-                    ),),
-                  )),
-                  SizedBox(height: 20,),
-                  FadeAnimation(1.6, Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      gradient: primaryGradient,
-                    ),
-                    child: MaterialButton(
-                      minWidth: double.infinity,
-                      height: 60,
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
-                      },
-                      //color: Colors.lightBlue,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50)
-                      ),
-                      child: Text("Sign up", style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18
-                      ),),
-                    ),
-                  ))
+                      )),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  FadeAnimation(
+                      1.6,
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          gradient: primaryGradient,
+                        ),
+                        child: MaterialButton(
+                          minWidth: double.infinity,
+                          height: 60,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignUp()));
+                          },
+                          //color: Colors.lightBlue,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                          child: Text(
+                            "Sign up",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 18, color: Colors.grey[300]),
+                          ),
+                        ),
+                      ))
                 ],
               )
             ],

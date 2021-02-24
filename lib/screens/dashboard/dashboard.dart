@@ -52,12 +52,12 @@ class _DashboardState extends State<Dashboard> {
       child: Column(
         children: [
           Text(searchSnapshot.docs[index].data()["address"], style: TextStyle(
-            color: Colors.white,
+            color: secondaryText,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),),
           Text("Investment: " + r"$"+searchSnapshot.docs[index].data()["money"], style: TextStyle(
-            color: Colors.white,
+            color: secondaryText,
             fontSize: 17,
             fontWeight: FontWeight.w500,
           ),)
@@ -78,10 +78,10 @@ class _DashboardState extends State<Dashboard> {
     final width =  MediaQuery.of(context).size.width;
 
     return searchSnapshot == null  ? Loading() : Scaffold(
-      backgroundColor: background,
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: darkBackground,
+        backgroundColor: Colors.grey[600],
         toolbarHeight: height/5.2,
         title: Column(
           children: [
@@ -125,7 +125,7 @@ class _DashboardState extends State<Dashboard> {
                     fontWeight: FontWeight.w300
                 )),
                 MaterialButton(
-                  color: secondaryBackground,
+                  color: Colors.grey[300],
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)
                   ),
@@ -137,13 +137,15 @@ class _DashboardState extends State<Dashboard> {
                     children: [
                       Text("Network", style: TextStyle(
                           fontSize: 16,
-                          color: Colors.white,
+                          color: secondaryText,
                           fontWeight: FontWeight.w400
                       )),
                       SizedBox(width: 10,),
-                      Icon(Icons.keyboard_arrow_down,
-                        color: Colors.white,
-                        size: 22,
+                      RadiantGradientMask(
+                        child: Icon(Icons.keyboard_arrow_down,
+                          color: Colors.white,
+                          size: 22,
+                        ),
                       )
                     ],
                   ),
@@ -161,7 +163,7 @@ class _DashboardState extends State<Dashboard> {
             Container(
               width: double.infinity,
               height: 28,
-              color: darkBackground,
+              color: Colors.grey[600],
             ),
             SingleChildScrollView(
               child: Column(
@@ -170,7 +172,7 @@ class _DashboardState extends State<Dashboard> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Card(
-                        color: secondaryBackground,
+                        color: Colors.grey[300],
                         elevation: 5,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(17)
@@ -185,6 +187,7 @@ class _DashboardState extends State<Dashboard> {
                               child: Container(
                                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                                 decoration: BoxDecoration(
+                                  color: Colors.grey[300],
                                   borderRadius: BorderRadius.circular(17),
                                 ),
                                 child: Column(
@@ -193,7 +196,7 @@ class _DashboardState extends State<Dashboard> {
                                       height: 50,
                                       width: 50,
                                       decoration: BoxDecoration(
-                                        color: thirdBackground,
+                                        color: Colors.grey[200],
                                         borderRadius: BorderRadius.circular(30),
                                       ),
                                       child: RadiantGradientMask(
@@ -204,7 +207,7 @@ class _DashboardState extends State<Dashboard> {
                                     SizedBox(height: 10,),
                                     Text("Cash Flow", style: TextStyle(
                                         fontSize: 16,
-                                        color: Colors.white,
+                                        color: secondaryText,
                                         fontWeight: FontWeight.w500
                                     )),
                                   ],
@@ -215,7 +218,7 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ),
                       Card(
-                        color: secondaryBackground,
+                        color: Colors.grey[300],
                         elevation: 5,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(17)
@@ -230,7 +233,7 @@ class _DashboardState extends State<Dashboard> {
                                     height: 50,
                                     width: 50,
                                     decoration: BoxDecoration(
-                                      color: thirdBackground,
+                                      color: Colors.grey[200],
                                       borderRadius: BorderRadius.circular(30),
                                     ),
                                     child: RadiantGradientMask(
@@ -241,7 +244,7 @@ class _DashboardState extends State<Dashboard> {
                                   SizedBox(height: 10,),
                                   Text("Break Even", style: TextStyle(
                                       fontSize: 16,
-                                      color: Colors.white,
+                                      color: secondaryText,
                                       fontWeight: FontWeight.w500
                                   )),
                                 ],
@@ -251,7 +254,7 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ),
                       Card(
-                        color: secondaryBackground,
+                        color: Colors.grey[300],
                         elevation: 5,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(17)
@@ -266,7 +269,7 @@ class _DashboardState extends State<Dashboard> {
                                     height: 50,
                                     width: 50,
                                     decoration: BoxDecoration(
-                                      color: thirdBackground,
+                                      color: Colors.grey[200],
                                       borderRadius: BorderRadius.circular(30),
                                     ),
                                     child: RadiantGradientMask(
@@ -277,7 +280,7 @@ class _DashboardState extends State<Dashboard> {
                                   SizedBox(height: 10,),
                                   Text(" Financing ", style: TextStyle(
                                       fontSize: 16,
-                                      color: Colors.white,
+                                      color: secondaryText,
                                       fontWeight: FontWeight.w500
                                   )),
                                 ],
@@ -289,20 +292,20 @@ class _DashboardState extends State<Dashboard> {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 11, top: 10, bottom: 5),
+                    padding: EdgeInsets.only(left: 11, top: 10, bottom: 8),
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: Text("Your Interested Properties", style: TextStyle(
                         fontFamily: "OpenSans",
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w300,
+                        color: paletteBlue,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
                       ),),
                     ),
                   ),
                   Card(
-                    margin: EdgeInsets.symmetric(horizontal: 8),
-                    color: secondaryBackground,
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    color: Colors.grey[300],
                     elevation: 5,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(17)
@@ -312,8 +315,20 @@ class _DashboardState extends State<Dashboard> {
                       child: Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: secondaryBackground,
+                          color: Colors.grey[300],
                           borderRadius: BorderRadius.circular(17),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey[500],
+                                offset: Offset(4.0, 4.0),
+                                blurRadius: 15.0,
+                                spreadRadius: 1.0),
+                            BoxShadow(
+                                color: Colors.white,
+                                offset: Offset(-4.0, -4.0),
+                                blurRadius: 15.0,
+                                spreadRadius: 1.0),
+                          ],
                         ),
                         height: 125,
                         child: Stack(
@@ -367,7 +382,7 @@ class _DashboardState extends State<Dashboard> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 11, top: 20, bottom: 5),
+                    padding: EdgeInsets.only(left: 11, top: 20, bottom: 8),
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: Column(
@@ -375,25 +390,37 @@ class _DashboardState extends State<Dashboard> {
                         children: [
                           Text("Nearby Housing Trends", style: TextStyle(
                             fontFamily: "OpenSans",
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w300,
+                            color: paletteBlue,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
                           ),),
                         ],
                       ),
                     ),
                   ),
                   Card(
-                    margin: EdgeInsets.symmetric(horizontal: 8),
-                    color: secondaryBackground,
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    color: Colors.grey[300],
                     elevation: 5,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(17)
                     ),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: secondaryBackground,
+                        color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(17),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey[500],
+                              offset: Offset(4.0, 4.0),
+                              blurRadius: 15.0,
+                              spreadRadius: 1.0),
+                          BoxShadow(
+                              color: Colors.white,
+                              offset: Offset(-4.0, -4.0),
+                              blurRadius: 15.0,
+                              spreadRadius: 1.0),
+                        ],
                       ),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 3.0, right: 3.0, top: 8.0),

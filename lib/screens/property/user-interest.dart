@@ -43,7 +43,7 @@ class _UserInterestState extends State<UserInterest> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: background,
+      backgroundColor: Colors.grey[300],
       body: Stack(
         children: [
           Container(
@@ -119,7 +119,7 @@ class _UserInterestState extends State<UserInterest> {
                     shrinkWrap: true,
                     children: [
                       FadeAnimation(0.9, Text("Interest Form", style: TextStyle(
-                          color: Colors.white,
+                          color: secondaryText,
                           fontFamily: "OpenSansEB",
                           fontWeight: FontWeight.bold,
                           fontSize: 40,
@@ -132,31 +132,31 @@ class _UserInterestState extends State<UserInterest> {
                             Text('Investment Amount', style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
-                              color: Colors.white.withOpacity(0.75),
+                              color: secondaryText,
                             ),),
                             SizedBox(height: 8,),
                             Row(
                               children: [
-                                Icon(Icons.attach_money, size: 25, color: Colors.white.withOpacity(.7),),
+                                Icon(Icons.attach_money, size: 25, color: secondaryText),
                                 SizedBox(width: 4,),
                                 Container(
                                   width: size.width*0.835,
                                   child: TextFormField(
                                     controller: money,
                                     keyboardType: TextInputType.number,
-                                    style: TextStyle(color: Colors.white),
-                                    cursorColor: Colors.white,
+                                    //style: TextStyle(color: Colors.white),
+                                    //cursorColor: Colors.white,
                                     decoration: InputDecoration(
                                       hintText: "Amount",
-                                      hintStyle: TextStyle(color: Colors.white.withOpacity(0.7)),
+                                      hintStyle: TextStyle(color: secondaryText),
                                       contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                                       enabledBorder: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(10),
-                                          borderSide: BorderSide(color: Colors.white.withOpacity(.7), width: 2)
+                                          borderSide: BorderSide(color: secondaryText, width: 2)
                                       ),
                                       border: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(10),
-                                          borderSide: BorderSide(color: Colors.white.withOpacity(.7), width: 2)
+                                          borderSide: BorderSide(color: secondaryText, width: 2)
                                       ),
                                     ),
                                   ),
@@ -191,25 +191,25 @@ class _UserInterestState extends State<UserInterest> {
         Text(title, style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w500,
-          color: Colors.white.withOpacity(0.75),
+          color: secondaryText.withOpacity(0.75),
         ),),
         SizedBox(height: 8,),
         TextFormField(
           controller: controller,
-          style: TextStyle(color: Colors.white),
-          cursorColor: Colors.white,
+          //style: TextStyle(color: Colors.white),
+          //cursorColor: Colors.white,
           maxLines: lines,
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: TextStyle(color: Colors.white.withOpacity(0.7)),
+            hintStyle: TextStyle(color: secondaryText),
             contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: Colors.white.withOpacity(.7), width: 2)
+                borderSide: BorderSide(color: secondaryText, width: 2)
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.white.withOpacity(.7), width: 2),
+              borderSide: BorderSide(color: secondaryText, width: 2),
             ),
           ),
         ),

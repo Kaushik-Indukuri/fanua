@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: background,
+      backgroundColor: Colors.grey[300],
       body: tabs[_currentIndex],
 
       bottomNavigationBar: Container(
@@ -57,9 +57,9 @@ class _HomeState extends State<Home> {
                 showSelectedLabels: false,
                 showUnselectedLabels: false,
                 elevation: 10,
-                backgroundColor: secondaryBackground,
-                unselectedItemColor: Colors.grey[400].withOpacity(0.3),
-                selectedItemColor: Colors.white,
+                backgroundColor: Colors.grey[300],
+                unselectedItemColor: secondaryText.withOpacity(0.7),
+                selectedItemColor: blueText,
                 items: [
                   BottomNavigationBarItem(
                     icon: Container(
@@ -100,7 +100,7 @@ class _HomeState extends State<Home> {
                 ),
                 child: FloatingActionButton(
                     elevation: 0.0,
-                    child: Icon(Icons.add, color: secondaryBackground, size: 42,),
+                    child: Icon(Icons.add, color: thirdBackground, size: 42,),
                     backgroundColor: Colors.transparent,
                     onPressed: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context) => Chatroom()));

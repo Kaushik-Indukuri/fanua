@@ -76,13 +76,16 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return loading ? Loading() : Scaffold(
+    if (loading) {
+      return Loading();
+    } else {
+      return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: background,
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         elevation: 0,
         brightness: Brightness.light,
-        backgroundColor: background,
+        backgroundColor: Colors.grey[300],
         leading: IconButton(
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => Welcome()));
@@ -100,197 +103,216 @@ class _SignInState extends State<SignIn> {
             children: <Widget>[
               Expanded(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    FadeAnimation(1, Container(
-                      height: MediaQuery.of(context).size.height / 6,
-                      //margin: EdgeInsets.only(bottom: 30),
-                      decoration: BoxDecoration(
-                        //color: Colors.red,
-                          image: DecorationImage(
-                              image: AssetImage('assets/fanua-logo.png')
-                          )
-                      ),
-                    )),
+                    SizedBox(height: 50),
+                    FadeAnimation(
+                        1,
+                        Text(
+                          "Login",
+                          style: TextStyle(
+                              color: blueText,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 34),
+                        )),
+                    SizedBox(height: 35,),
                     Stack(
                       overflow: Overflow.visible,
                       children: [
                         Card(
-                        color: secondaryBackground,
-                        elevation: 10,
+                        color: Colors.grey[300],
+                        //elevation: 10,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(17)
                         ),
                         margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-                          child: Column(
-                            children: [
-                              FadeAnimation(1.1,
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    MaterialButton(
-                                      onPressed: () async{},
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(50)
-                                      ),
-                                      child: Text('LOGIN', style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500,
-                                        color: blueText,
-                                      ),),
-                                    ),
-                                    MaterialButton(
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
-                                      },
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(50)
-                                      ),
-                                      child: Text('SIGN UP', style: TextStyle(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius: BorderRadius.circular(17),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.grey[500],
+                                    offset: Offset(4.0, 4.0),
+                                    blurRadius: 15.0,
+                                    spreadRadius: 1.0),
+                                BoxShadow(
+                                    color: Colors.white,
+                                    offset: Offset(-4.0, -4.0),
+                                    blurRadius: 15.0,
+                                    spreadRadius: 1.0),
+                              ],
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                            child: Column(
+                              children: [
+                                FadeAnimation(1.1,
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      MaterialButton(
+                                        onPressed: () async{},
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(50)
+                                        ),
+                                        child: Text('LOGIN', style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w500,
-                                          color: secondaryText,
-                                      ),),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              FadeAnimation(1.2,
-                                 Stack(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(bottom: 25),
-                                      height: 2,
-                                      color: Colors.grey[400].withOpacity(0.3),
-                                    ),
-                                    Positioned(
-                                      left: MediaQuery.of(context).size.width / 7.25,
-                                      child: Container(
-                                        margin: EdgeInsets.only(bottom: 25),
-                                        height: 3,
-                                        width: 50,
-                                        color: blueText,
+                                          color: blueText,
+                                        ),),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                              //login
-                              Form(
-                                key: formKey,
-                                child: Column(
-                                  children: <Widget>[
-                                    FadeAnimation(1.3, Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text('Email', style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
-                                            color: secondaryText
-                                        ),),
-                                        SizedBox(height: 7,),
-                                        TextFormField(
-                                          style: TextStyle(color: Colors.white),
-                                          cursorColor: Colors.white,
-                                          controller: emailTextEditingController,
-                                          obscureText: false,
-                                          validator: (val){
-                                            return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(val) ?
-                                            null : "Enter a valid email";
-                                          },
-                                          decoration: InputDecoration(
-                                            prefixIcon: Icon(Icons.email, color: blueText,),
-                                            hintText: "Email",
-                                            hintStyle: TextStyle(color: Colors.grey[400].withOpacity(0.3)),
-                                            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                                            enabledBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(50),
-                                                borderSide: BorderSide(color: Colors.grey[400].withOpacity(0.3))
-                                            ),
-                                            border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(50),
-                                                borderSide: BorderSide(color: Colors.grey[400].withOpacity(0.3))
-                                            ),
-                                          ),
+                                      MaterialButton(
+                                        onPressed: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
+                                        },
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(50)
                                         ),
-                                        SizedBox(height: 20,),
-                                      ],
-                                    ),),
-                                    FadeAnimation(1.4, Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text('Password', style: TextStyle(
-                                            fontSize: 15,
+                                        child: Text('SIGN UP', style: TextStyle(
+                                            fontSize: 20,
                                             fontWeight: FontWeight.w500,
-                                            color: secondaryText
+                                            color: secondaryText,
                                         ),),
-                                        SizedBox(height: 7,),
-                                        TextFormField(
-                                          style: TextStyle(color: Colors.white),
-                                          cursorColor: Colors.white,
-                                          controller: passwordTextEditingController,
-                                          obscureText: secureText,
-                                          validator: (val) {
-                                            return val.length > 6 ? null : "Enter a password with 6+ characters";
-                                          },
-                                          decoration: InputDecoration(
-                                            suffixIcon: IconButton(
-                                              onPressed: (){
-                                                 setState(() {
-                                                   secureText = !secureText;
-                                                 });
-                                              },
-                                              icon: Icon(
-                                                secureText ? Icons.visibility_off : Icons.visibility, color: secondaryText.withOpacity(0.5)
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                FadeAnimation(1.2,
+                                   Stack(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(bottom: 25),
+                                        height: 2,
+                                        color: Colors.grey[400].withOpacity(0.3),
+                                      ),
+                                      Positioned(
+                                        left: MediaQuery.of(context).size.width / 7.25,
+                                        child: Container(
+                                          margin: EdgeInsets.only(bottom: 25),
+                                          height: 3,
+                                          width: 50,
+                                          color: blueText,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                //login
+                                Form(
+                                  key: formKey,
+                                  child: Column(
+                                    children: <Widget>[
+                                      FadeAnimation(1.3, Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text('Email', style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                              color: secondaryText
+                                          ),),
+                                          SizedBox(height: 7,),
+                                          TextFormField(
+                                            //style: TextStyle(color: Colors.white),
+                                            //cursorColor: Colors.white,
+                                            controller: emailTextEditingController,
+                                            obscureText: false,
+                                            validator: (val){
+                                              return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(val) ?
+                                              null : "Enter a valid email";
+                                            },
+                                            decoration: InputDecoration(
+                                              prefixIcon: Icon(Icons.email, color: blueText,),
+                                              hintText: "Email",
+                                              hintStyle: TextStyle(color: Colors.grey[500].withOpacity(.9)),
+                                              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.circular(50),
+                                                  borderSide: BorderSide(color: Colors.grey[500].withOpacity(0.7))
+                                              ),
+                                              border: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.circular(50),
+                                                  borderSide: BorderSide(color: Colors.grey[500].withOpacity(0.7))
                                               ),
                                             ),
-                                            hintText: "Password",
-                                            hintStyle: TextStyle(color: Colors.grey[400].withOpacity(0.3)),
-                                            prefixIcon: Icon(Icons.lock_outline, color: blueText,),
-                                            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                                            enabledBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(50),
-                                                borderSide: BorderSide(color: Colors.grey[400].withOpacity(.3))
-                                            ),
-                                            border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(50),
-                                                borderSide: BorderSide(color: Colors.grey[400].withOpacity(.3))
+                                          ),
+                                          SizedBox(height: 20,),
+                                        ],
+                                      ),),
+                                      FadeAnimation(1.4, Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text('Password', style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                              color: secondaryText
+                                          ),),
+                                          SizedBox(height: 7,),
+                                          TextFormField(
+                                            //style: TextStyle(color: Colors.white),
+                                            //cursorColor: Colors.white,
+                                            controller: passwordTextEditingController,
+                                            obscureText: secureText,
+                                            validator: (val) {
+                                              return val.length > 6 ? null : "Enter a password with 6+ characters";
+                                            },
+                                            decoration: InputDecoration(
+                                              suffixIcon: IconButton(
+                                                onPressed: (){
+                                                   setState(() {
+                                                     secureText = !secureText;
+                                                   });
+                                                },
+                                                icon: Icon(
+                                                  secureText ? Icons.visibility_off : Icons.visibility, color: secondaryText.withOpacity(0.5)
+                                                ),
+                                              ),
+                                              hintText: "Password",
+                                              hintStyle: TextStyle(color: Colors.grey[500].withOpacity(0.9)),
+                                              prefixIcon: Icon(Icons.lock_outline, color: blueText,),
+                                              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.circular(50),
+                                                  borderSide: BorderSide(color: Colors.grey[500].withOpacity(.7))
+                                              ),
+                                              border: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.circular(50),
+                                                  borderSide: BorderSide(color: Colors.grey[500].withOpacity(.7))
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        //SizedBox(height: 2,),
-                                      ],
-                                    ),),
-                                  ],
-                                ),
-                              ),
-
-                              //forgot you pwd
-                              FadeAnimation(1.5,
-                                Container(
-                                  child: Align(
-                                    alignment: Alignment.topRight,
-                                    child: MaterialButton(
-                                      onPressed: () async{
-
-                                      },
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(50)
-                                      ),
-                                      child: Text('Forgot your password?', style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        color: secondaryText,
+                                          //SizedBox(height: 2,),
+                                        ],
                                       ),),
+                                    ],
+                                  ),
+                                ),
+
+                                //forgot you pwd
+                                FadeAnimation(1.5,
+                                  Container(
+                                    child: Align(
+                                      alignment: Alignment.topRight,
+                                      child: MaterialButton(
+                                        onPressed: () async{
+
+                                        },
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(50)
+                                        ),
+                                        child: Text('Forgot your password?', style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500,
+                                          color: secondaryText,
+                                        ),),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(height: 24,),
-                            ],
+                                SizedBox(height: 24,),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -303,6 +325,18 @@ class _SignInState extends State<SignIn> {
                               decoration: BoxDecoration(
                                 gradient: primaryGradient,
                                 borderRadius: BorderRadius.circular(50),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey[500],
+                                      offset: Offset(4.0, 4.0),
+                                      blurRadius: 15.0,
+                                      spreadRadius: 1.0),
+                                  BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(-4.0, -4.0),
+                                      blurRadius: 15.0,
+                                      spreadRadius: 1.0),
+                                ],
                               ),
                               child: MaterialButton(
                                 minWidth: MediaQuery.of(context).size.width/1.5,
@@ -316,7 +350,8 @@ class _SignInState extends State<SignIn> {
                                 ),
                                 child: Text("Login", style: TextStyle(
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 18
+                                    color: Colors.grey[300],
+                                    fontSize: 18,
                                 ),),
                               ),
                             ),
@@ -339,6 +374,7 @@ class _SignInState extends State<SignIn> {
         ),
       ),
     );
+    }
   }
 }
 
